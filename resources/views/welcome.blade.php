@@ -254,6 +254,58 @@
             transform: translateY(-2px);
             border-color: var(--accent) !important;
         }
+        .contact-form {
+            margin-top: 32px;
+            display: grid;
+            gap: 16px;
+        }
+        .contact-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 14px;
+            padding: 16px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 200ms, box-shadow 200ms;
+        }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--text-muted);
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        }
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+        .contact-form button {
+            background: linear-gradient(135deg, #22d3ee 0%, #38bdf8 100%);
+            color: #0f172a;
+            border: none;
+            border-radius: 14px;
+            padding: 16px 24px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 160ms ease, box-shadow 160ms ease;
+            margin-top: 8px;
+        }
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+        }
         @media (max-width: 960px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -262,6 +314,11 @@
                 min-height: 320px;
             }
             .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .contact-form .form-row {
                 grid-template-columns: 1fr;
             }
         }
@@ -455,31 +512,42 @@
         </section>
 
         <section id="contact" class="card section">
-            <h2>Kontak</h2>
-            <div class="contact-list">
-                <div class="contact-item">
-                    <div class="contact-label">
-                        <i class="fa-solid fa-envelope"></i>
-                        <strong>Email</strong>
-                    </div>
-                    <span>muhammadmuharrikimaduddin@gmail.com</span>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-label">
-                        <i class="fa-solid fa-phone"></i>
-                        <strong>Telepon</strong>
-                    </div>
-                    <span>+62 857-1126-7286</span>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-label">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <strong>Lokasi</strong>
-                    </div>
-                    <span>Purworejo, Jawa Tengah</span>
-                </div>
+    <h2>Kontak</h2>
+
+    <div class="contact-list">
+        <div class="contact-item">
+            <div class="contact-label">
+                <i class="fa-solid fa-envelope"></i>
+                <strong>Email</strong>
             </div>
-        </section>
+            <span>muhammadmuharrikimaduddin@gmail.com</span>
+        </div>
+
+        <div class="contact-item">
+            <div class="contact-label">
+                <i class="fa-solid fa-phone"></i>
+                <strong>Telepon</strong>
+            </div>
+            <span>+62 857-1126-7286</span>
+        </div>
+    </div>
+
+    {{-- FORM MASUK SINI --}}
+    <form action="/messages" method="POST" class="contact-form">
+        @csrf
+
+        <div class="form-row">
+            <input type="text" name="nama" placeholder="Nama Lengkap" required>
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
+
+        <input type="text" name="subject" placeholder="Subject" required>
+
+        <textarea name="message" placeholder="Tulis pesan..." required></textarea>
+
+        <button type="submit">Kirim Pesan</button>
+    </form>
+</section>
     </main>
 </body>
 </html>
